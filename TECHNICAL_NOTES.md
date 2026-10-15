@@ -1,0 +1,3 @@
+# Technical section (submission-ready draft)
+
+PAIR is a client-side HTML/CSS/JavaScript prototype. It does not scrape Instagram or LinkedIn. Participants provide their public profile URLs and paste self-authored or otherwise authorized profile text. The app derives transparent interest/theme signals from that text, generates a template-based agent conversation, and ranks pairs using deterministic interest overlap. For production, use platform-authorized APIs where available and participant consent; do not bypass access controls or collect private content. Suggested stack: Next.js + TypeScript, Node.js API, PostgreSQL/Prisma, and an LLM adapter returning validated structured JSON.

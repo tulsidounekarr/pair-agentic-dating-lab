@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PAIR — Agentic Dating Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">p</span><span>pair<span class="dot">.</span></span></a>
+    <div class="side-label">WORKSPACE</div>
+    <button class="nav active" data-tab="discover"><span>⌘</span> Discover people</button>
+    <button class="nav" data-tab="profiles"><span>◉</span> Agent profiles <b id="profile-count">25</b></button>
+    <button class="nav" data-tab="dates"><span>♡</span> Agent dates</button>
+    <button class="nav" data-tab="rankings"><span>↗</span> Compatibility rankings</button>
+    <div class="side-bottom"><div class="status"><i></i><span>LOCAL DEMO MODE</span></div><p>Built for thoughtful<br>connections, not swipes.</p><small>PAIR LAB · PROTOTYPE 0.1</small></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="crumb">PAIR LAB <span>/</span> <strong id="crumb-current">Discover people</strong></div><div class="top-right"><span class="privacy">✳ Consent-first demo</span><div class="avatar">PL</div></div></header>
+    <section class="hero">
+      <div class="hero-copy"><div class="eyebrow"><span class="eyebrow-line"></span> A DIFFERENT KIND OF INTRODUCTION</div><h1>Let your agent<br>meet <em>their</em> agent.</h1><p>Personality signals in. Thoughtful conversations out. Discover compatibility beyond the first impression.</p><div class="hero-actions"><button class="primary" id="start-dates">Run agent dates <span>↗</span></button><button class="secondary" id="jump-rankings">View rankings</button></div></div>
+      <div class="hero-art"><div class="orbit orbit1"></div><div class="orbit orbit2"></div><div class="orbit orbit3"></div><div class="orb orb-a"><span>✳</span></div><div class="orb orb-b"><span>♡</span></div><div class="orbit-label label-a">YOUR AGENT</div><div class="orbit-label label-b">THEIR AGENT</div><div class="center-star">✦</div></div>
+      <div class="hero-foot"><span>01 / READ THE SIGNALS</span><span>02 / LET AGENTS CONNECT</span><span>03 / RANK BY RECIPROCITY</span></div>
+    </section>
+    <section class="content" id="discover-view">
+      <div class="section-head"><div><div class="eyebrow">THE PEOPLE</div><h2>Build your pool<span class="dot">.</span></h2><p class="muted">Add public profile links and the profile text you have permission to use. This demo does not scrape or infer private traits.</p></div><div class="count-pill"><span id="people-count">25</span> PEOPLE IN POOL</div></div>
+      <div class="add-panel">
+        <div class="panel-top"><div class="panel-icon">＋</div><div><h3>Add a person</h3><p>Two profile links, plus public bio or self-shared notes.</p></div><span class="panel-tag">LINKEDIN + INSTAGRAM</span></div>
+        <form id="person-form">
+          <div class="form-grid"><label>Display name<input id="name" required placeholder="e.g. Alex Morgan"></label><label>LinkedIn public profile URL<input id="linkedin" type="url" required placeholder="https://www.linkedin.com/in/..."></label><label>Instagram public profile URL<input id="instagram" type="url" required placeholder="https://www.instagram.com/..."></label><label>Profile text / interests<textarea id="bio" required rows="3" placeholder="Paste public bio or consented notes: hobbies, interests, values, ideal weekend…"></textarea></label></div>
+          <div class="form-bottom"><span>ⓘ URLs are stored locally in this browser. No automated scraping.</span><button class="primary" type="submit">Analyze profile <span>↗</span></button></div>
+        </form>
+      </div>
+      <div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="search" placeholder="Search people, interests, roles…"></div><div class="filters"><button class="filter active" data-filter="all">All people</button><button class="filter" data-filter="analyzed">Analyzed</button></div></div>
+      <div class="people-grid" id="people-grid"></div>
+      <div class="demo-note"><span>✳</span><div><strong>Demo data note</strong><p>The 25 starter profiles are fictional personas for testing the full workflow. Replace them with consenting participants before recording a real-person demo. No profile content is fetched from the supplied URLs.</p></div></div>
+    </section>
+    <section class="content hidden" id="profiles-view"><div class="section-head"><div><div class="eyebrow">THE ANALYSIS</div><h2>Agent profiles<span class="dot">.</span></h2><p class="muted">Signals extracted from the supplied text, with confidence and source boundaries.</p></div></div><div id="profile-detail"></div></section>
+    <section class="content hidden" id="dates-view"><div class="section-head"><div><div class="eyebrow">THE MEET-CUTE, SIMULATED</div><h2>Agents on a date<span class="dot">.</span></h2><p class="muted">Each agent advocates for its person's stated interests, asks questions, and explores practical fit. This is a transparent simulation, not a real-world interaction.</p></div><button class="primary" id="run-dates">Run dates again ↗</button></div><div class="date-layout"><div class="date-list" id="date-list"></div><div class="date-stage" id="date-stage"><div class="empty-state"><div class="empty-heart">♡</div><h3>Ready for a first conversation?</h3><p>Run the agent dates to see how two profiles find common ground—and where they differ.</p><button class="primary" id="empty-run">Start the dates ↗</button></div></div></div></section>
+    <section class="content hidden" id="rankings-view"><div class="section-head"><div><div class="eyebrow">MUTUAL FIT, NOT JUST A SCORE</div><h2>Compatibility rankings<span class="dot">.</span></h2><p class="muted">Rankings are generated from explicit interest overlap, lifestyle signals and stated preferences. They are exploratory—not predictions or judgments.</p></div><button class="primary" id="rank-run">Recalculate ↗</button></div><div class="ranking-controls"><label>Rank for<select id="rank-person"></select></label><div class="score-legend"><span><i class="legend-dot"></i> Shared interests</span><span><i class="legend-dot gold"></i> Lifestyle fit</span><span><i class="legend-dot gray"></i> Conversation quality</span></div></div><div id="ranking-list" class="ranking-list"></div></section>
+    <footer><span>PAIR LAB · EXPERIMENTAL MATCHMAKING</span><span>Designed for curiosity, built around consent. <b>♥</b></span></footer>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body></html>
